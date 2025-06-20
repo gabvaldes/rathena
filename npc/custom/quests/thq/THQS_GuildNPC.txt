@@ -9,78 +9,82 @@
 //===== Description: =========================================
 //= Start for Treasure hunter quests
 //===== Additional Comments: =================================
-//= Event_THQS - Used to check if you have already registered
+//= #Event_THQS - Used to check if you have already registered
 //= #Treasure_Token - used to keep track of tokens
 //============================================================
 
 yuno_in01,124,164,6	script	Guild Leader	108,{
-	mes "[Keegan]";
+	mes "[ ^840084Keegan^000000 ]";
 	mes "What brings you here? Have something to say?";
 	next;
-	menu "I want to be a Treasure Hunter",-,"Take a New Quest.",N_NQuest,"Take me to the Official Shop.",N_OShop,"Never mind.",N_NVM;
-	if(Event_THQS==1) goto N_AlreadyReg;
-	mes "[Keegan]";
-	mes "Well "+strcharinfo(0)+" if you want to be a Treasure Hunter first you must.";
-	mes " ";
-	mes "^FF00001.^000000 You well be changed ^FF000025,000z^000000 for basic training and your proof of being a member.";
-	mes " ";
-	mes "Umm... Well that is all you need to do. Hahaha.";
+	menu "[-] Apply as a Treasure Hunter",-,"[-] Take a New Quest",N_NQuest,"[-] Treasure Hunter's Shop",N_OShop,"^777777[-] Nevermind^000000",N_NVM;
+	if(#Event_THQS==1) goto N_AlreadyReg;
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Well, " + strcharinfo(0) + ", if you want to be a Treasure Hunter, first you must:";
+	mes "";
+	mes "1. Pay ^009900200,000,000z^000000 for basic training and your proof of being a member.";
+	mes "";
+	mes "Umm... well, actually, that's the only thing you need to do. Ha ha ha.";
 	next;
-	menu "Pay ^FF000025,000z^000000.",-,"Thats way to high!!",N_HighPrice;
-	if (Zeny < 25000) goto N_NoZeny;
-	set Zeny,Zeny-25000;
+	menu "[-] Pay ^009900200,000,000z^000000.",-,"^777777[-] That's way too high!^000000",N_HighPrice;
+	if (Zeny < 200000000) goto N_NoZeny;
+	set Zeny,Zeny-200000000;
 	//getitem 7950, 1;
 	//getitem 7951, 1;
-	set Event_THQS,1;
-	mes "[Keegan]";
+	set #Event_THQS,1;
+	mes "[ ^840084Keegan^000000 ]";
 	mes "Congratulations!";
 	emotion ET_CONGRATULATION;
 	next;
-	mes "[Keegan]";
-	mes "Welcome to the Guild of Treasure Hunters.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Welcome to the Treasure Hunter's Guild!";
+	mes "";
 	mes "You may now take a Treasure Hunting Quest as you see fit.";
 	close;
+
 N_NoZeny:
-	mes "[Keegan]";
-	mes "Hmmm you don't seem to have ^FF000025,000z^000000 "+strcharinfo(0)+". Please come back when you do.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Hmm, you don't seem to have ^009900200,000,000z^000000, " + strcharinfo(0) + ".";
+	mes "Please come back when you do.";
 	close;
+
 N_HighPrice:
-	mes "[Keegan]";
-	mes "Well if you can't afford a small ^FF000025,000z^000000 you shouldn't be a Treasure Hunter yet.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Well, if you can't afford a small ^009900200,000,000z^000000 fee, you shouldn't be a Treasure Hunter yet!";
 	close;
+
 N_AlreadyReg:
-	mes "[Keegan]";
-	mes "Ha ha ha...you are already a member.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Ha ha ha... you're already a Treasure Hunter!";
 	close;
+
 N_NQuest:
-	if (Event_THQS!=1) goto A_NeedReg;
-	mes "[Keegan]";
-	mes "Well "+strcharinfo(0)+" if you wish to take a quest go talk to the fellow Treasure Hunter in the other room there.";
-	close;
+	if (#Event_THQS != 1) goto A_NeedReg;
+	mes "[ ^840084Keegan^000000 ]";
+	warp "yuno_in01",110,158;
+	end;
+
 A_NeedReg:
-	mes "[Keegan]";
-	mes "Sorry you must be a member of the Treasure Hunter Guild if you wish to take a quest.";
-	mes " ";
-	mes "Also now that you are a member feel free to use our shops anytime you wish.They are all located on this floor.";
-	mes " ";
-	mes "We also have another shop for members only,in which we use little metal diamonds called Treasure Hunter Tokens to exchange for rare goods.";
-	mes " ";
-	mes "You will even have access to our exclusive personal Dungeon.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Sorry, you must be a member of the Treasure Hunter's Guild if you wish to take a quest.";
 	close;
+
 N_OShop:
-	if (Event_THQS!=1) goto N_NeedMem;
-	mes "[Keegan]";
-	mes "Yes "+strcharinfo(0)+" I will take you to our shop right away!";
+	if (#Event_THQS != 1) goto N_NeedMem;
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Sure, " + strcharinfo(0) + ", I will take you to our shop right away!";
 	next;
 	warp "prt_in",166,171;
 	close;
 	end;
+
 N_NeedMem:
-	mes "[Keegan]";
-	mes "I'm sorry only members may visit our private shop.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "I'm sorry, only members may visit our shop.";
 	close;
+
 N_NVM:
-	mes "[Keegan]";
-	mes "Alright come back when you have the free time to spare.";
+	mes "[ ^840084Keegan^000000 ]";
+	mes "Alright, come back when you have the free time to spare.";
 	close;
 }

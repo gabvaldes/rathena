@@ -19,18 +19,22 @@
 //============================================================
 
 yuno_in01,112,151,6	script	Quest Manager	62,{
-	mes "[Guy]";
-	mes "Welcome to the Treasure Hunters Guild "+strcharinfo(0)+".";
+	mes "[ Guy ]";
+	mes "Welcome to the Treasure Hunter's Guild, " + strcharinfo(0) + "!";
 	next;
+	
+	
+
 	if (On_Quest == 0) goto N_NewQuest;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Look " +strcharinfo(0)+ ", you can only 1 quest at a time, you should finish the quest unless you have given up.";
 	mes "Giving up will cost you ^FF00002500z^000000.";
 	next;
 	menu "No, never would I leave a quest!",-,"Yah I'm pathetic... Pay 2500z",N_PayZeny;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Good well get back out there.";
 	close;
+
 N_PayZeny:
 	if (Zeny < 2500) goto N_ZenyFail;
 	set one_qset, 0;
@@ -47,14 +51,14 @@ N_PayZeny:
 	set Zeny,Zeny-2500;
 	//add time delay penalty. You can get another quest after 2 - 3 hours. [Lupus]
 	set #THQ_DELAY, (GetTime(DT_YEAR)*12*31*24+GetTime(DT_MONTH)*31*24+GetTime(DT_DAYOFMONTH)*24+GetTime(DT_HOUR)+rand(2,3));
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Its sad to see someone give a quest up...";
 	mes "Shame on you.";
 	emotion ET_ANGER;
 	close;
 
 N_ZenyFail:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Thats sad you don't even have ^FF00002500z^000000.";
 	close;
 
@@ -62,14 +66,14 @@ N_NewQuest:
 	if (Event_THQS == 0) goto N_Signup;
 	//checking if time penalty is over [Lupus]
 	if (#THQ_DELAY > (GetTime(DT_YEAR)*12*31*24 + GetTime(DT_MONTH)*31*24 + GetTime(DT_DAYOFMONTH)*24 + GetTime(DT_HOUR)) ) goto L_NoQuestsForYet;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ahh welcome fellow Treasure Hunter.";
 	mes "You currently have ^FF0000"+#Treasure_Token+"^000000 treasure tokens!!!";
 	mes "Would you like me to assign you a Quest?";
 	next;
 	menu "Yes I would like a Quest Please.",-,"Sorry Guy no time today.",N_NoTime;
 	
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok lets see what quest we can give you today.";
 	mes "The quest names in ^FF0000This Colour^000000 mean that they are more challenging then the rest, but have better rewards.";
 	next;
@@ -88,19 +92,19 @@ N_NewQuest:
 	goto N_JobList1; //if(@treasure_job==1)
 
 N_NoTime:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Alright maybe next time "+strcharinfo(0)+".";
 	emotion ET_SCRATCH;
 	close;
 
 N_Signup:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "I'm afraid you must sign up for the guild before you can go on a quest!";
 	emotion ET_SORRY;
 	close;
 
 L_NoQuestsForYet:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "I'm afraid there aren't any Quests for you yet.";
 	mes "Call in "+ (#THQ_DELAY - (GetTime(DT_YEAR)*12*31*24+GetTime(DT_MONTH)*31*24+GetTime(DT_DAYOFMONTH)*24+GetTime(DT_HOUR)) )+" hours later.";
 	emotion ET_SORRY;
@@ -113,24 +117,24 @@ L_QuestGiven:
 
 ///////Job list 1///////
 N_JobList1:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Lost Old Man.",-,"Master needs his Bow.",N_MasterBow,"The Hit List.",N_HitList,"^FF0000The Sad Widow.^000000",N_SadWidow;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "^FF0000Lost Old Man^000000";
 	mes "^FF0000------------^000000";
 	mes "This is an easy and low payed quest.";
 	mes " ";
 	mes "A wife came in asking us to find his husband, she seems to come in a lot asking us to find him over and over again.";
 	next;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "But he always seems to be around the same place so there isn't much looking involved,check the mountains 1 west and 1 north of Prontera.";
 	set one_qset,1;
 	goto L_QuestGiven;
 
 N_MasterBow:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "^FF0000Master needs his Bow^000000";
 	mes "^FF0000--------------------^000000";
 	mes "This is just a package delivery run, no big deal or anything.";
@@ -141,14 +145,14 @@ N_MasterBow:
 	goto L_QuestGiven;
 
 N_HitList:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "^FF0000The Hit List^000000";
 	mes "^FF0000------------^000000";
 	mes "In this quest you get to see some action.";
 	mes " ";
 	mes "There has been a farmer that keeps having all his crops eaten by ^FF0000Thief Bugs, Porings, and Lunatics^000000 here is a lost of what I need you to do. He is waiting East of Prontera.";
 	next;
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok go to the east and bash those little bastards like there is no tomorrow. When you are done with that list you have just discard it, but you will NOT get another one!.";
 	set one_qset,3;
 	goto L_QuestGiven;
@@ -164,7 +168,7 @@ N_SadWidow:
 
 ///////Job list 2///////
 N_JobList2:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "The Strange Letter",-,"Jur for Jeramiah",N_JurJeramiah,"Bee Keepers Hunny",N_BeeHunny,"^FF0000The Wander Man^000000",N_WanderMan;
@@ -209,7 +213,7 @@ N_WanderMan:
 
 ///////Job list 3///////
 N_JobList3:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Damn Pixies!",-,"Package Delivery",N_Delivery1,"Prontera Culvert",N_ProntCulvert,"^FF0000Trouble at the Coal Mine^000000",N_CoalMine;
@@ -255,7 +259,7 @@ N_CoalMine:
 
 ///////Job list 4///////
 N_JobList4:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Zombie Attack",-,"Mystic Wizard",N_MWizard,"Aww shoot!",N_Shoot,"^FF0000Emperium^000000",N_Emp;
@@ -297,7 +301,7 @@ N_Emp:
 
 ///////Job list 5///////
 N_JobList5:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Savage Land",-,"Pyramid's part 1",N_PyrPRT1,"Thinking first",N_Thinkfirst,"^FF0000The not so friendly ghost^000000",N_Ghost;
@@ -339,7 +343,7 @@ N_Ghost:
 
 ///////Job list 6///////
 N_JobList6:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Package for thieves",-,"Pyramid's part 2",N_PyrPRT2,"Special delivery",N_Delivery2,"^FF0000Geffenia^000000",N_Gef;
@@ -382,7 +386,7 @@ N_Gef:
 
 ///////Job list 7///////
 N_JobList7:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Apple Juice",-,"Delivery",N_Delivery3,"^FF0000Golden Thief Bug^000000",N_GTB,"^FF0000Evil Pirates^000000",N_EvilPirates;
@@ -424,7 +428,7 @@ N_EvilPirates:
 
 ///////Job list 8///////
 N_JobList8:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Banana Juice",-,"Another Delivery",N_Delivery4,"My lost beeds",N_LostBeeds,"^FF0000Baphomet!^000000",N_Bapho;
@@ -466,7 +470,7 @@ N_LostBeeds:
 
 ///////Job list 9///////
 N_JobList9:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "Smelly Box",-,"Payon Cave",N_PayonC,"^FF0000Sohee's Everywhere!^000000",N_Sohee,"^FF0000Moonlight Flower^000000",N_Moonlight;
@@ -511,7 +515,7 @@ N_PayonC:
 
 ///////Job list 10///////
 N_JobList10:
-	mes "[Guy]";
+	mes "[ Guy ]";
 	mes "Ok you have a couple quests that can be done here.";
 	next;
 	menu "The Blank Box",-,"^FF0000Eddga^000000",N_Eddga,"^FF0000Phreeoni^000000",N_Phreeoni,"^FF0000Maya^000000",N_Maya;
